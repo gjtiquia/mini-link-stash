@@ -8,6 +8,7 @@ TODO
 - main page wireframge
   - Create link
   - Read link
+    - tan stack table?
   - Update link
   - Delete link
 - desktop responsive design (larger fonts)
