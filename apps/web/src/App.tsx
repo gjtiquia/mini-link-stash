@@ -1,5 +1,5 @@
-// import { MainPage } from "./features/stash";
-import { LoginPage } from "./features/login";
+// import { MainPage } from "@/features/stash";
+import { LoginPage } from "@/features/login";
 
 export default App
 
