@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button";
 import { Header } from "./Header";
 
 export function LoginPage() {
@@ -28,14 +29,15 @@ function HeroBanner() {
 }
 
 function HeroCallToAction() {
-    return <div className="flex flex-col items-center gap-2">
-        <p>
-            Start stashing your links
-        </p>
-        <button
-            className="bg-black active:bg-gray-500 text-white text-xl font-bold px-16 py-2 rounded-md"
-        >
-            Sign In With Google
-        </button>
-    </div>;
+    return (
+        <div className="flex flex-col items-center gap-2">
+            <p>
+                Start stashing your links
+            </p>
+
+            <Button size={"lg"} className="text-xl px-16">
+                Sign In With Google
+            </Button>
+        </div>
+    );
 }

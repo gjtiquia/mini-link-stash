@@ -1,3 +1,5 @@
+import { Button } from "@/components/ui/button";
+
 export function MainPage() {
     return (
         <div className="h-dvh flex flex-col">
@@ -31,11 +33,9 @@ export function Header() {
 
 
             <div className="px-3">
-                <button
-                    className="text-sm bg-black active:bg-gray-500 text-white font-bold px-4 py-1 rounded-md"
-                >
+                <Button size={"sm"}>
                     Sign Out
-                </button>
+                </Button>
             </div>
         </div>
 
@@ -80,10 +80,8 @@ function DashboardView() {
 
 function AddLinkButton() {
     return <div className="flex flex-col items-center gap-2">
-        <button
-            className="bg-black active:bg-gray-500 text-white text-xl font-bold px-28 py-4 rounded-md"
-        >
+        <Button size={"lg"} className="text-xl px-28 py-6">
             Add Link
-        </button>
+        </Button>
     </div>;
 }
