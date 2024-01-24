@@ -1,3 +1,4 @@
+import { ModeToggle } from "@/components/mode-toggle";
 import { Button } from "@/components/ui/button";
 
 export function MainPage() {
@@ -32,7 +33,9 @@ export function Header() {
             </button>
 
 
-            <div className="px-3">
+            <div className="px-3 flex items-center gap-3">
+                <ModeToggle />
+
                 <Button size={"sm"}>
                     Sign Out
                 </Button>
