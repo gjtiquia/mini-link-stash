@@ -1,4 +1,30 @@
-// import { MainPage } from "@/features/stash";
+import { RouterProvider, Router } from '@tanstack/react-router'
+
+// Import the generated route tree
+import { routeTree } from './routeTree.gen'
+
+// Create a new router instance
+const router = new Router({ routeTree })
+
+// Register the router instance for type safety
+declare module '@tanstack/react-router' {
+  interface Register {
+    router: typeof router
+  }
+}
+
+// Render the app
+export default App
+
+function App() {
+  return (
+    <RouterProvider router={router} />
+  )
+}
+
+/* Temporarily commented while setting up TanStack Router
+
+import { MainPage } from "@/features/stash";
 import { LoginPage } from "@/features/login";
 import { ThemeProvider } from "@/components/theme-provider"
 
@@ -18,9 +44,10 @@ function InnerApp() {
   )
 }
 
-// function InnerApp() {
-//   return (
-//     <MainPage />
-//   )
-// }
+function InnerApp() {
+  return (
+    <MainPage />
+  )
+}
 
+*/
