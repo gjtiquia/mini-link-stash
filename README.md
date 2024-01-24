@@ -1,5 +1,10 @@
 # Mini Link Stash
 
+## Commands
+
+`npm install`: Install required packages
+`npm run dev:web`: Start `/apps/web` development environment
+
 TODO
 
 - login wireframe
