@@ -1,7 +1,7 @@
-import { createRouter, createHashHistory } from '@tanstack/react-router';
-
-// Import the generated route tree
+import { createRouter, createHashHistory, NotFoundRoute } from '@tanstack/react-router';
 import { routeTree } from '../../routeTree.gen'
+import { Route as RootRoute } from '@/routes/__root'
+import { NotFoundPage } from '@/features/NotFoundPage';
 
 /*
 Support static web servers
@@ -30,8 +30,14 @@ https://github.com/remix-run/react-router/blob/v3/docs/guides/Histories.md
 */
 const hashHistory = createHashHistory();
 
-// Create a new router instance
-export const router = createRouter({ routeTree, history: hashHistory });
+export const router = createRouter({
+    routeTree,
+    history: hashHistory,
+    notFoundRoute: new NotFoundRoute({
+        getParentRoute: () => RootRoute,
+        component: () => <NotFoundPage />
+    })
+});
 
 // Register the router instance for type safety
 declare module '@tanstack/react-router' {
