@@ -1,10 +1,10 @@
-import { RouterProvider, Router } from '@tanstack/react-router'
+import { RouterProvider, createRouter } from '@tanstack/react-router'
 
 // Import the generated route tree
 import { routeTree } from './routeTree.gen'
 
 // Create a new router instance
-const router = new Router({ routeTree })
+const router = createRouter({ routeTree })
 
 // Register the router instance for type safety
 declare module '@tanstack/react-router' {
