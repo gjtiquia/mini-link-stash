@@ -1,9 +1,9 @@
-import { Header } from "./Header";
+import { Header } from "@/components/Header";
 
 export function AboutPage() {
     return (
         <div className="h-dvh flex flex-col">
-            <Header />
+            <Header variant="about" />
 
             <p>TODO : About Page</p>
         </div>

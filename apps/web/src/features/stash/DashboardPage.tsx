@@ -1,10 +1,10 @@
 import { Button } from "@/components/ui/button";
-import { Header } from "./Header";
+import { Header } from "@/components/Header";
 
 export function DashboardPage() {
     return (
         <div className="h-dvh flex flex-col">
-            <Header />
+            <Header variant="app" />
 
             <div className="flex-grow py-2">
                 <DashboardView />
