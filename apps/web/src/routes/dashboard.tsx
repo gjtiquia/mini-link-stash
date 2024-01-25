@@ -1,12 +1,12 @@
+import { createRoute, redirect } from "@tanstack/react-router"
+import { DashboardPage } from "@/features/stash"
 import { useAuthStore } from '@/store'
-import { createFileRoute, redirect } from '@tanstack/react-router'
+import { rootRoute } from "./__root"
 
-// Reference: https://tanstack.com/router/v1/docs/guide/authenticated-routes
-
-export const Route = createFileRoute('/dashboard')({
+export const dashboardRoute = createRoute({
     beforeLoad: () => {
         const isLoggedIn = useAuthStore.getState().isLoggedIn;
-        if (!isLoggedIn)
+        if (!isLoggedIn) {
             throw redirect({
                 to: '/',
                 search: {
@@ -16,5 +16,10 @@ export const Route = createFileRoute('/dashboard')({
                     redirect: location.href, // Basically passes a /?redirect=http://localhost:5173/dashboard in the url, so we know where they directed from
                 },
             })
-    }
+        }
+    },
+
+    getParentRoute: () => rootRoute,
+    path: '/dashboard',
+    component: () => <DashboardPage />,
 })
