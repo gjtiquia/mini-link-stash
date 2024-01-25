@@ -1,6 +1,7 @@
 import { ModeToggle } from "@/components/mode-toggle";
 import { Button } from "@/components/ui/button";
 import { Link } from "@tanstack/react-router";
+import { LogInSequenceAsync } from "./LogInSequenceAsync";
 
 export function Header() {
     return (
@@ -15,8 +16,8 @@ export function Header() {
                 GitHub
             </a>
 
-            <Button size={"sm"}>
-                Sign In
+            <Button size={"sm"} onClick={() => LogInSequenceAsync()}>
+                Log In
             </Button>
         </div>
     );

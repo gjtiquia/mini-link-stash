@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Header } from "./Header";
 
-export function MainPage() {
+export function DashboardPage() {
     return (
         <div className="h-dvh flex flex-col">
             <Header />
