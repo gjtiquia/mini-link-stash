@@ -8,8 +8,11 @@
 
 TODO
 
-- login wireframe
-- tanstack router routing
+- tanstack router hash routing
+  - cuz served as a static site, no server capabilities to auto-route
+  - can reproduce by serving `/dist` build with `npx http-server`, directly going to the `/about` url, will return 404 (Not Found)
+  - broken in production as well
+  - <https://stackoverflow.com/questions/77466065/using-tanstack-router-with-a-spa-in-github-pages>
 - about wireframe
 - main page wireframge
   - Create link
