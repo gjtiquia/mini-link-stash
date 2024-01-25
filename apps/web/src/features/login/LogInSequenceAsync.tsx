@@ -1,5 +1,5 @@
 import { useAuthStore } from "@/store";
-import { router } from "@/lib/router";
+import { router } from "@/providers/RouterProvider/router";
 
 export async function LogInSequenceAsync() {
     useAuthStore.getState().login();
