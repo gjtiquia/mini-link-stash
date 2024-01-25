@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "@tanstack/react-router";
 import { DarkModeToggle } from "@/components/DarkModeToggle";
 import { Button } from "@/components/ui/button";
-import { loginSequenceAsync } from "@/features/login";
+import { tryLoginSequenceAsync } from "@/features/login";
 import { useAuthStore } from "@/store";
 import { HeaderVariant } from "./Header";
 
@@ -30,7 +30,7 @@ export function RightHeader(props: { variant: HeaderVariant; }) {
 
 function LogInButton() {
     return (
-        <Button size={"sm"} onClick={() => loginSequenceAsync()}>
+        <Button size={"sm"} onClick={() => tryLoginSequenceAsync()}>
             Log In
         </Button>
     );

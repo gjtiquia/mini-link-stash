@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Header } from "@/components/Header";
-import { loginSequenceAsync } from "./loginSequenceAsync";
+import { tryLoginSequenceAsync } from "./tryLoginSequenceAsync";
 
 export function LoginPage() {
 
@@ -38,7 +38,7 @@ function HeroCallToAction() {
                 Start stashing your links
             </p>
 
-            <Button size={"lg"} className="text-xl px-16" onClick={() => loginSequenceAsync()}>
+            <Button size={"lg"} className="text-xl px-16" onClick={() => tryLoginSequenceAsync()}>
                 Log In With Google
             </Button>
 
