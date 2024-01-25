@@ -1,18 +1,19 @@
 import { ModeToggle } from "@/components/mode-toggle";
 import { Button } from "@/components/ui/button";
+import { Link } from "@tanstack/react-router";
 
 export function Header() {
     return (
-        <div className="flex justify-end items-center p-3 gap-3">
+        <div className="flex justify-end items-center p-2 gap-3">
             <ModeToggle />
 
-            <p className="text-sm">
+            <Link className="text-sm" to={"/about"}>
                 About
-            </p>
+            </Link>
 
-            <p className="text-sm">
+            <a className="text-sm" href="https://github.com/gjtiquia/mini-link-stash" target="_blank">
                 GitHub
-            </p>
+            </a>
 
             <Button size={"sm"}>
                 Sign In
