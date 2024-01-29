@@ -30,10 +30,13 @@ TL;DR
 
 Decided to go with `lucia`.
 
-If have React Native, use `Supabase Auth`, automatically handles (cookies for web) / (local storage for mobile app) out of the box.
-
 `next-auth` => `auth-js` docs are in a terrible state right now.
 
-For web apps, `lucia` is a new solution that is gaining traction. More bare bones but more customization.
+`Supabase Auth` tho you can technically self host, is still super bloated with lots of defaults and need to use their entire suite even if just using for Auth. Railway does not support docker-compose yet so cannot self host on Railway. Docs are really good tho and really easy to get started.
+
+For web apps, `lucia` is a new solution that is gaining traction. More bare bones but more customization.  
+As of now, v3 was published 2 days ago (2024-01-27)  
+v2 docs have guide on React Native with Expo (https://v2.lucia-auth.com/guidebook/github-oauth-native/expo/)  
+Uses bearer token instead of cookies (compared to web which uses cookies by default)  
 
 Both `auth-js` and `lucia` uses your own database for auth. You own and manage the data, unlike `Supabase Auth`.
