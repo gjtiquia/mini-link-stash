@@ -8,15 +8,29 @@
 
 ## Docker Commands
 
-`docker compose up --build`: Start Local Postgres Server
+`docker compose up --build`: Start Local Postgres Server. Remember to create `/secrets` (see `/secrets.example`).
+
+## Docker Notes
+
+`docker compose up --build` vs `docker compose up`
+
+- <https://stackoverflow.com/questions/39988844/docker-compose-up-vs-docker-compose-up-build-vs-docker-compose-build-no-cach>
+- The latter builds if no image found, the former builds image even when not needed.
+
+NodeJS + Postgres Dev Guide
+
+- <https://docs.docker.com/language/nodejs/develop/>
+- uses `pg`
+
+Official Postgres Docker Guide
+
+- <https://www.docker.com/blog/how-to-use-the-postgres-docker-official-image/>
 
 TODO
 
-- tanstack router hash routing
-  - cuz served as a static site, no server capabilities to auto-route
-  - can reproduce by serving `/dist` build with `npx http-server`, directly going to the `/about` url, will return 404 (Not Found)
-  - broken in production as well
-  - <https://stackoverflow.com/questions/77466065/using-tanstack-router-with-a-spa-in-github-pages>
+- google sign in + auth
+- access token + express server + postgres
+  - set up local dev environment with docker
 - about wireframe
 - main page wireframge
   - Create link
@@ -26,7 +40,3 @@ TODO
   - Delete link
 - desktop responsive design (larger fonts)
 - themes
-- light/dark mode toggle
-- google sign in + supabase auth
-- access token + express server + postgres
-  - set up local dev environment with docker
