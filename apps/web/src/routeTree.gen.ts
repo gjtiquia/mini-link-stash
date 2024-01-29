@@ -17,23 +17,17 @@ const IndexLazyImport = createFileRoute('/')()
 const AboutLazyRoute = AboutLazyImport.update({
   path: '/about',
   getParentRoute: () => rootRoute,
-} as any).update({
-  lazy: () => import('./routes/about.lazy').then((d) => d.Route),
-})
+} as any).lazy(() => import('./routes/about.lazy').then((d) => d.Route))
 
 const DashboardRoute = DashboardImport.update({
   path: '/dashboard',
   getParentRoute: () => rootRoute,
-} as any).update({
-  lazy: () => import('./routes/dashboard.lazy').then((d) => d.Route),
-})
+} as any).lazy(() => import('./routes/dashboard.lazy').then((d) => d.Route))
 
 const IndexLazyRoute = IndexLazyImport.update({
   path: '/',
   getParentRoute: () => rootRoute,
-} as any).update({
-  lazy: () => import('./routes/index.lazy').then((d) => d.Route),
-})
+} as any).lazy(() => import('./routes/index.lazy').then((d) => d.Route))
 
 // Populate the FileRoutesByPath interface
 
