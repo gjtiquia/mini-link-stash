@@ -1,10 +1,14 @@
 # Mini Link Stash
 
-## Commands
+## NPM Commands
 
 `npm install`: Install required packages
 
 `npm run dev:web`: Start `/apps/web` development environment
+
+## Docker Commands
+
+`docker compose up --build`: Start Local Postgres Server
 
 TODO
 
