@@ -1,7 +1,5 @@
-import { createRouter, createHashHistory, NotFoundRoute } from '@tanstack/react-router';
+import { createRouter, createHashHistory } from '@tanstack/react-router';
 import { routeTree } from '../../routeTree.gen'
-import { Route as RootRoute } from '@/routes/__root'
-import { NotFoundPage } from '@/features/NotFoundPage';
 
 /*
 Support static web servers
@@ -32,11 +30,7 @@ const hashHistory = createHashHistory();
 
 export const router = createRouter({
     routeTree,
-    history: hashHistory,
-    notFoundRoute: new NotFoundRoute({
-        getParentRoute: () => RootRoute,
-        component: () => <NotFoundPage />
-    })
+    history: hashHistory
 });
 
 // Register the router instance for type safety

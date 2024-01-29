@@ -1,5 +1,5 @@
 export function NotFoundPage() {
     return (
-        <p>Page Not Found!</p>
+        <p>Mini Link Stash does not have this page!</p>
     )
 }
