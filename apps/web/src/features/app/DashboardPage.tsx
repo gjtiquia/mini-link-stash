@@ -13,6 +13,7 @@ export function DashboardPage() {
                 <DashboardView />
             </div>
 
+            {greetingQuery.isPending && <p>{"Loading..."}</p>}
             {greetingQuery.isSuccess && <p>{greetingQuery.data.message}</p>}
             {greetingQuery.isError && <p>{greetingQuery.error.message}</p>}
 
