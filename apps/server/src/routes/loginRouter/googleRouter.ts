@@ -21,6 +21,8 @@ export const googleRouter = express.Router();
 
 googleRouter.get("/", async (req: Request, res: Response) => {
 
+    console.log("login request from ", req.headers);
+
     const state = generateState();
     const codeVerifier = generateCodeVerifier();
 
@@ -93,14 +95,20 @@ googleRouter.get("/callback", async (req: Request, res: Response) => {
         const userExists = userQueryResult.length > 0;
 
         if (userExists) {
+            console.log(`User ${googleUser.email} exists!`);
+
             const existingUser = userQueryResult[0];
             const session = await lucia.createSession(existingUser.id, {});
             const sessionCookie = lucia.createSessionCookie(session.id);
 
             return res
                 .appendHeader("Set-Cookie", sessionCookie.serialize())
-                .redirect("/");
+
+                // TODO : For now hardcode
+                .redirect("https://mini-link-stash.netlify.app/#/");
         }
+
+        console.log(`User ${googleUser.email} does not exist! Creating new user...`);
 
         const userId = generateId(15);
 
