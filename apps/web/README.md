@@ -24,6 +24,16 @@ Jotai vs Zustand
 - Zustand is a global store but can consume outside of React
 - [Official Comparison from Zustand docs](https://docs.pmnd.rs/zustand/getting-started/comparison#jotai)
 
+Zustand persist
+
+- <https://docs.pmnd.rs/zustand/integrations/persisting-store-data>
+- Can store data in localStorage
+  - localStorage vs sessionStorage vs cookies
+    - <https://www.loginradius.com/blog/engineering/guest-post/local-storage-vs-session-storage-vs-cookies/>
+  - supabase stores token in localStorage
+    - <https://www.reddit.com/r/Supabase/comments/11z7xa0/securely_store_session_using_supabase/>
+    - <https://supabase.com/docs/guides/auth/server-side-rendering#how-do-i-make-the-cookies-httponly->
+
 ## Auth Notes
 
 TL;DR
@@ -36,7 +46,7 @@ Decided to go with `lucia`.
 
 For web apps, `lucia` is a new solution that is gaining traction. More bare bones but more customization.  
 As of now, v3 was published 2 days ago (2024-01-27)  
-v2 docs have guide on React Native with Expo (https://v2.lucia-auth.com/guidebook/github-oauth-native/expo/)  
+v2 docs have guide on React Native with Expo (<https://v2.lucia-auth.com/guidebook/github-oauth-native/expo/>)  
 Uses bearer token instead of cookies (compared to web which uses cookies by default)  
 
 Both `auth-js` and `lucia` uses your own database for auth. You own and manage the data, unlike `Supabase Auth`.
