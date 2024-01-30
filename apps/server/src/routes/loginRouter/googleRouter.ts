@@ -57,7 +57,15 @@ googleRouter.get("/callback", async (req: Request, res: Response) => {
 
     if (!code || !state || !codeVerifier || !storedState || state !== storedState) {
         console.log("Invalid Credentials!");
-        console.log(code, state, storedState);
+        // console.log(code, state, storedState);
+
+        console.log("code", code);
+        console.log("state", state);
+        console.log("codeVerifier", codeVerifier);
+        console.log("storedState", storedState);
+
+        console.log("state is equals", state === storedState)
+
         res.status(400).end();
         return;
     }
