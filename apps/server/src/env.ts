@@ -1,6 +1,14 @@
 import "dotenv/config" // import from .env before anything else!
 
 export const env = {
+
+    IS_PRODUCTION: (() => {
+        if (!process.env.NODE_ENV)
+            throw new Error("NODE_ENV undefined!");
+
+        return process.env.NODE_ENV === "production";
+    })(),
+
     PORT: (() => {
         if (!process.env.PORT)
             throw new Error("PORT undefined!");
@@ -34,5 +42,12 @@ export const env = {
             throw new Error("GOOGLE_REDIRECT_URI undefined!");
 
         return process.env.GOOGLE_REDIRECT_URI;
+    })(),
+
+    WEB_APP_URL: (() => {
+        if (!process.env.WEB_APP_URL)
+            throw new Error("WEB_APP_URL undefined!");
+
+        return process.env.WEB_APP_URL;
     })(),
 }
