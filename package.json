@@ -9,6 +9,7 @@
   ],
   "scripts": {
     "dev:web": "cd apps/web && npm run dev:host",
+    "dev:server": "cd apps/server && npm run dev",
     "build:web": "cd apps/web && npm run build",
     "preview:web": "cd apps/web && npm run preview:host"
   }
