@@ -35,7 +35,9 @@
   - <https://stackoverflow.com/questions/35489372/expressjs-applying-middleware-only-to-routes-in-router>
 
 - can't send tokens on remote redirect
-  - https://github.com/expressjs/express/issues/3551 
+  - <https://github.com/expressjs/express/issues/3551>
   - basically the redirect only includes url in header
   - cookies are only accessible from the same domain
   - that begs the question... how does supabase do it?
+    - UPDATE: supabase sends the access token via params! Then stores in local storage (not cookies), then quickly resets the url
+    - supposingly unsecure but... it works lmaooo~
