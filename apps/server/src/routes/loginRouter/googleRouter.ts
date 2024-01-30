@@ -46,11 +46,11 @@ googleRouter.get("/", async (req: Request, res: Response) => {
 
 googleRouter.get("/callback", async (req: Request, res: Response) => {
 
-    const code = req.query.code?.toString() ?? null;
-    const state = req.query.state?.toString() ?? null;
-    const codeVerifier = req.query.codeVerifier?.toString() ?? null;
+    const code = req.query.code?.toString();
+    const state = req.query.state?.toString();
+    const codeVerifier = req.query.codeVerifier?.toString();
 
-    const storedState = req.cookies[GOOGLE_OAUTH_STATE] ?? null;
+    const storedState = req.cookies[GOOGLE_OAUTH_STATE];
 
     if (!code || !state || !codeVerifier || !storedState || state !== storedState) {
         console.log(code, state, storedState);
