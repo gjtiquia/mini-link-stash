@@ -110,9 +110,16 @@ googleRouter.get("/callback", async (req: Request, res: Response) => {
         })
 
         const session = await lucia.createSession(userId, {});
+        const sessionCookie = lucia.createSessionCookie(session.id);
+
         return res
-            .appendHeader("Set-Cookie", lucia.createSessionCookie(session.id).serialize())
-            .redirect("/");
+            .appendHeader("Set-Cookie", sessionCookie.serialize())
+
+            // TODO : Redirect back to mini-link-stash/dashboard
+            // TODO : Seems... better to be able to pass this all the way from the client?
+            // TODO : For now hardcode
+            .redirect("https://mini-link-stash.netlify.app/#/");
+
     } catch (e) {
         // the specific error message depends on the provider
         if (e instanceof OAuth2RequestError) {
