@@ -33,3 +33,9 @@
 
 - it is possible to only apply middleware to certain routes
   - <https://stackoverflow.com/questions/35489372/expressjs-applying-middleware-only-to-routes-in-router>
+
+- can't send tokens on remote redirect
+  - https://github.com/expressjs/express/issues/3551 
+  - basically the redirect only includes url in header
+  - cookies are only accessible from the same domain
+  - that begs the question... how does supabase do it?
