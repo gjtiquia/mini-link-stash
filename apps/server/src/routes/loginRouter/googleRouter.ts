@@ -28,18 +28,23 @@ googleRouter.get("/", async (req: Request, res: Response) => {
         scopes: ["email"]
     });
 
-    return res
+    const cookieAttributes = {
+        path: "/",
+        secure: process.env.NODE_ENV === "production",
+        httpOnly: true, // Client browser cannot access this cookie
+        maxAge: 60 * 10,
+        sameSite: "lax" as const
+    }
 
+    return res
         // Sets cookies in client browser
         .appendHeader(
             "Set-Cookie",
-            serializeCookie(GOOGLE_OAUTH_STATE, state, {
-                path: "/",
-                secure: process.env.NODE_ENV === "production",
-                httpOnly: true,
-                maxAge: 60 * 10,
-                sameSite: "lax"
-            })
+            serializeCookie(GOOGLE_OAUTH_STATE, state, cookieAttributes)
+        )
+        .appendHeader(
+            "Set-Cookie",
+            serializeCookie(GOOGLE_OAUTH_CODE_VERIFIER, codeVerifier, cookieAttributes)
         )
 
         // Redirects client to Google Login
@@ -50,18 +55,17 @@ googleRouter.get("/callback", async (req: Request, res: Response) => {
 
     const code = req.query.code?.toString() ?? null;
     const state = req.query.state?.toString() ?? null;
-    const codeVerifier = req.query.codeVerifier?.toString() ?? null;
 
     const cookies = parseCookies(req.headers.cookie ?? "");
     const storedState = cookies.get(GOOGLE_OAUTH_STATE) ?? null;
+    const storedCodeVerifier = cookies.get(GOOGLE_OAUTH_CODE_VERIFIER) ?? null;
 
-    if (!code || !state || !codeVerifier || !storedState || state !== storedState) {
+    if (!code || !state || !storedCodeVerifier || !storedState || state !== storedState) {
         console.log("Invalid Credentials!");
-        // console.log(code, state, storedState);
 
         console.log("code", code);
         console.log("state", state);
-        console.log("codeVerifier", codeVerifier);
+        console.log("storedCodeVerifier", storedCodeVerifier);
         console.log("storedState", storedState);
 
         console.log("state is equals", state === storedState)
@@ -71,7 +75,7 @@ googleRouter.get("/callback", async (req: Request, res: Response) => {
     }
 
     try {
-        const tokens = await google.validateAuthorizationCode(code, codeVerifier);
+        const tokens = await google.validateAuthorizationCode(code, storedCodeVerifier);
 
         const googleUserResponse = await fetch("https://openidconnect.googleapis.com/v1/userinfo", {
             headers: {
@@ -128,3 +132,4 @@ interface GoogleUser {
 
 // CONSTANTS
 const GOOGLE_OAUTH_STATE = "google_oauth_state";
+const GOOGLE_OAUTH_CODE_VERIFIER = "google_oauth_code_verifier";
