@@ -4,6 +4,7 @@ import { Button, buttonVariants } from "@/components/ui/button";
 import { useAuthStore } from "@/store";
 import { HeaderVariant } from "./Header";
 import { googleLoginURL } from "@/features/home/googleLoginURL";
+import { trpc } from "@/lib/trpc";
 
 export function RightHeader(props: { variant: HeaderVariant; }) {
 
@@ -41,17 +42,18 @@ function LogInButton() {
 
 function LogOutButton() {
 
-    const logOut = useAuthStore((state) => state.logout);
+    const discardAccessToken = useAuthStore((state) => state.discardAccessToken);
     const navigate = useNavigate();
 
-    async function logOutSequenceAsync() {
-        // TODO : Log out from google
-        logOut();
-        navigate({ to: "/" });
-    }
+    const logOutMutation = trpc.logout.useMutation({
+        onSettled: () => {
+            discardAccessToken();
+            navigate({ to: "/" });
+        },
+    })
 
     return (
-        <Button size={"sm"} onClick={() => logOutSequenceAsync()}>
+        <Button size={"sm"} onClick={() => logOutMutation.mutate()}>
             Log Out
         </Button>
     );

@@ -8,7 +8,7 @@ interface State {
 interface Action {
     setAccessToken: (access_token: string) => void
     isLoggedIn: () => boolean
-    logout: () => void
+    discardAccessToken: () => void
 }
 
 export const useAuthStore = create<State & Action>()(
@@ -22,7 +22,7 @@ export const useAuthStore = create<State & Action>()(
 
             // Mutations
             setAccessToken: (access_token) => set(() => ({ access_token })),
-            logout: () => set(() => ({ access_token: "" })),
+            discardAccessToken: () => set(() => ({ access_token: "" })),
         }),
         {
             name: 'mini-link-stash-auth-store', // name of the item in the storage (must be unique)

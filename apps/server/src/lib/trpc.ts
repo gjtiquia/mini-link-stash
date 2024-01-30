@@ -17,7 +17,8 @@ export async function createContext({ req, res, }: trpcExpress.CreateExpressCont
         return { authError: "Invalid session!" };
 
     return {
-        user
+        user,
+        session
     }
 };
 
@@ -37,7 +38,8 @@ export const protectedProcedure = t.procedure.use(async function isAuthed(opts) 
 
     return opts.next({
         ctx: {
-            user: ctx.user
+            user: ctx.user,
+            session: ctx.session
         }
     });
 });
