@@ -1,7 +1,7 @@
 import express from "express"
 import cors from "cors";
 import { env } from "./env";
-import { loginRouter } from "./routes";
+import { loginRouter, appRouter } from "./routes";
 
 const app = express();
 const PORT = env.PORT;
@@ -13,6 +13,7 @@ app.use(cors({
 
 // Set Routes
 app.use("/login", loginRouter);
+app.use("/app", appRouter)
 
 app.listen(PORT, () => {
     console.log(`Server is running at: http://localhost:${PORT}`);

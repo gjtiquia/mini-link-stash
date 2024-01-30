@@ -1,7 +1,10 @@
 import { Button } from "@/components/ui/button";
 import { Header } from "@/components/Header";
+import { trpc } from "@/lib/trpc";
 
 export function DashboardPage() {
+    const greetingQuery = trpc.greeting.useQuery();
+
     return (
         <div className="h-dvh flex flex-col">
             <Header variant="app" />
@@ -9,6 +12,9 @@ export function DashboardPage() {
             <div className="flex-grow py-2">
                 <DashboardView />
             </div>
+
+            {greetingQuery.isSuccess && <p>{greetingQuery.data.message}</p>}
+            {greetingQuery.isError && <p>{greetingQuery.error.message}</p>}
 
             <div className="py-8">
                 <AddLinkButton />

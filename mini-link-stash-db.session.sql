@@ -7,5 +7,5 @@ FROM session;
 SELECT *
 FROM user;
 -- @block
--- deletes ALL rows in the session table
+-- ! deletes ALL rows in the session table
 DELETE FROM session

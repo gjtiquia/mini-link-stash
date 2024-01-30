@@ -3,6 +3,7 @@
   "private": true,
   "version": "0.1.0",
   "type": "module",
+  "main": "src/index.ts",
   "scripts": {
     "start": "node dist/main.js",
     "build": "tsup src/main.ts --format cjs,esm --dts",
@@ -17,6 +18,7 @@
   },
   "dependencies": {
     "@lucia-auth/adapter-drizzle": "^1.0.0",
+    "@trpc/server": "^11.0.0-next-beta.248",
     "arctic": "^1.1.0",
     "cors": "^2.8.5",
     "dotenv": "^16.4.1",
@@ -25,7 +27,8 @@
     "lucia": "^3.0.1",
     "oslo": "^1.0.3",
     "pg": "^8.11.3",
-    "postgres": "^3.4.3"
+    "postgres": "^3.4.3",
+    "zod": "^3.22.4"
   },
   "devDependencies": {
     "@types/cors": "^2.8.17",

@@ -41,3 +41,8 @@
   - that begs the question... how does supabase do it?
     - UPDATE: supabase sends the access token via params! Then stores in local storage (not cookies), then quickly resets the url
     - supposingly unsecure but... it works lmaooo~
+
+## trpc Notes
+
+- Setup
+  - <https://trpc.io/docs/server/adapters/express>

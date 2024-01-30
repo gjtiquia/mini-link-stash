@@ -1,11 +1,13 @@
-import { ThemeProvider, TanStackRouterProvider } from "@/providers"
+import { ThemeProvider, TanStackRouterProvider, OuterProvider } from "@/providers"
 
 export default App
 
 function App() {
   return (
-    <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-      <TanStackRouterProvider />
-    </ThemeProvider>
+    <OuterProvider>
+      <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+        <TanStackRouterProvider />
+      </ThemeProvider>
+    </OuterProvider>
   )
 }

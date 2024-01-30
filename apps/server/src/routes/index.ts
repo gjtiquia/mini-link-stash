@@ -1,1 +1,2 @@
-export * from "./loginRouter" 
+export * from "./loginRouter"
+export * from "./appRouter"
