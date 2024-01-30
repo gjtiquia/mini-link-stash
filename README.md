@@ -26,6 +26,12 @@ Official Postgres Docker Guide
 
 - <https://www.docker.com/blog/how-to-use-the-postgres-docker-official-image/>
 
+`expose` vs `port` in docker compose
+
+- <https://ioflood.com/blog/docker-compose-ports-vs-expose-explained/>
+- `expose` is for use between containers. An internal network that cannot be accessed from the outside.
+- `port` is for bridging between internal network to external. Therefore a mapping is needed. Anyone who can access external host can access internal containers.
+
 TODO
 
 - google sign in + auth
