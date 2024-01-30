@@ -32,6 +32,8 @@ function HeroBanner() {
 
 function HeroCallToAction() {
 
+    // Login Reference: https://github.com/lucia-auth/examples/blob/main/nextjs-pages/github-oauth/pages/login.tsx
+
     return (
         <div className="flex flex-col items-center gap-2">
             <p>
