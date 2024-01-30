@@ -1,11 +1,12 @@
 import * as trpcExpress from '@trpc/server/adapters/express';
-import { createContext, publicProcedure, router } from "../lib/trpc";
+import { createContext, protectedProcedure, router } from "../lib/trpc";
 
 const trpcAppRouter = router({
-    greeting: publicProcedure
-        .query(() => {
+    greeting: protectedProcedure
+        .query((opts) => {
+            const { ctx } = opts;
 
-            console.log("Server received greeting query!")
+            console.log("Server received greeting query! Context:", ctx)
 
             return { message: "hello world!" };
         }),
