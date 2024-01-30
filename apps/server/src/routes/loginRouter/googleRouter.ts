@@ -2,7 +2,7 @@ import express from "express"
 import type { Request, Response } from "express" // Use type import so will not compile into JavaScript
 import { OAuth2RequestError, generateCodeVerifier, generateState } from "arctic";
 import { generateId } from "lucia";
-import { serializeCookie } from "oslo/cookie";
+import { serializeCookie, parseCookies } from "oslo/cookie";
 import { eq } from "drizzle-orm";
 import { google } from "../../lib/arctic";
 import { db, users } from "../../lib/drizzle";
@@ -11,9 +11,11 @@ import { lucia } from "../../lib/lucia";
 // References:
 // - https://github.com/lucia-auth/examples/blob/main/express/github-oauth/routes/login/github.ts
 // - https://github.com/lucia-auth/examples/blob/main/nextjs-pages/github-oauth/pages/api/login/github/index.ts
-// - https://lucia-auth.com/tutorials/github-oauth/nextjs-pages
+// - https://lucia-auth.com/guides/oauth/basics
+// - https://lucia-auth.com/tutorials/github-oauth/nextjs-pages //! note that req.cookies is only valid in NextJS
 // - https://arctic.js.org/providers/google
 // - https://arctic.js.org/guides/oauth2-pkce
+
 
 export const googleRouter = express.Router();
 
@@ -50,14 +52,8 @@ googleRouter.get("/callback", async (req: Request, res: Response) => {
     const state = req.query.state?.toString() ?? null;
     const codeVerifier = req.query.codeVerifier?.toString() ?? null;
 
-    if (!req.cookies) {
-        console.log("No cookies!");
-        console.log(req.query, req.cookies);
-        res.status(400).end();
-        return;
-    }
-
-    const storedState = req.cookies[GOOGLE_OAUTH_STATE] ?? null;
+    const cookies = parseCookies(req.headers.cookie ?? "");
+    const storedState = cookies.get(GOOGLE_OAUTH_STATE) ?? null;
 
     if (!code || !state || !codeVerifier || !storedState || state !== storedState) {
         console.log("Invalid Credentials!");
@@ -87,9 +83,10 @@ googleRouter.get("/callback", async (req: Request, res: Response) => {
         if (userExists) {
             const existingUser = userQueryResult[0];
             const session = await lucia.createSession(existingUser.id, {});
+            const sessionCookie = lucia.createSessionCookie(session.id);
 
             return res
-                .appendHeader("Set-Cookie", lucia.createSessionCookie(session.id).serialize())
+                .appendHeader("Set-Cookie", sessionCookie.serialize())
                 .redirect("/");
         }
 
