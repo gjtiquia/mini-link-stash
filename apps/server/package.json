@@ -4,9 +4,9 @@
   "version": "0.1.0",
   "type": "module",
   "scripts": {
-    "start": "node dist/main.cjs",
-    "build": "tsup src/main.ts",
-    "dev": "tsup src/main.ts --watch --onSuccess \"npm run start\"",
+    "start": "node dist/main.js",
+    "build": "tsup src/main.ts --format cjs,esm --dts",
+    "dev": "tsup src/main.ts --format cjs,esm --dts --watch --onSuccess \"npm run start\"",
     "test": "jest",
     "db:push": "drizzle-kit push:pg",
     "db:pull": "drizzle-kit introspect:pg",
@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "@lucia-auth/adapter-drizzle": "^1.0.0",
+    "arctic": "^1.1.0",
     "cors": "^2.8.5",
     "dotenv": "^16.4.1",
     "drizzle-orm": "^0.29.3",

@@ -14,4 +14,25 @@ export const env = {
 
         return process.env.POSTGRES_CONNECTION_STRING;
     })(),
+
+    GOOGLE_CLIENT_ID: (() => {
+        if (!process.env.GOOGLE_CLIENT_ID)
+            throw new Error("GOOGLE_CLIENT_ID undefined!");
+
+        return process.env.GOOGLE_CLIENT_ID;
+    })(),
+
+    GOOGLE_CLIENT_SECRET: (() => {
+        if (!process.env.GOOGLE_CLIENT_SECRET)
+            throw new Error("GOOGLE_CLIENT_SECRET undefined!");
+
+        return process.env.GOOGLE_CLIENT_SECRET;
+    })(),
+
+    GOOGLE_REDIRECT_URI: (() => {
+        if (!process.env.GOOGLE_REDIRECT_URI)
+            throw new Error("GOOGLE_REDIRECT_URI undefined!");
+
+        return process.env.GOOGLE_REDIRECT_URI;
+    })(),
 }
