@@ -2,11 +2,18 @@
   "name": "@mini-link-stash/server",
   "private": true,
   "version": "0.1.0",
+  "type": "module",
   "scripts": {
     "start": "node dist/index.js",
     "build": "tsup src/index.ts",
     "dev": "tsup src/index.ts --watch --onSuccess \"npm run start\"",
-    "test": "jest"
+    "test": "jest",
+    "db:push": "drizzle-kit push:pg",
+    "db:pull": "drizzle-kit introspect:pg",
+    "db:migration:generate": "drizzle-kit generate:pg",
+    "db:migration:run": "npx tsx migration.ts",
+    "db:migration:drop": "drizzle-kit drop",
+    "db:studio": "drizzle-kit studio"
   },
   "devDependencies": {
     "@types/jest": "^29.5.11",
@@ -18,7 +25,12 @@
     "typescript": "^5.3.3"
   },
   "dependencies": {
+    "@lucia-auth/adapter-drizzle": "^1.0.0",
+    "dotenv": "^16.4.1",
     "drizzle-orm": "^0.29.3",
-    "pg": "^8.11.3"
+    "lucia": "^3.0.1",
+    "oslo": "^1.0.3",
+    "pg": "^8.11.3",
+    "postgres": "^3.4.3"
   }
 }
