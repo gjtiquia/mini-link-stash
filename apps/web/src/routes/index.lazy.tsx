@@ -1,4 +1,4 @@
-import { LoginPage } from "@/features/login"
+import { HomePage } from "@/features/home"
 import { createLazyFileRoute } from "@tanstack/react-router"
 
 export const Route = createLazyFileRoute('/')({
@@ -7,6 +7,6 @@ export const Route = createLazyFileRoute('/')({
 
 function Index() {
     return (
-        <LoginPage />
+        <HomePage />
     )
 }

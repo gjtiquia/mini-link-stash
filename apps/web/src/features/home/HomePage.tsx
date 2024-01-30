@@ -2,7 +2,7 @@ import { buttonVariants } from "@/components/ui/button";
 import { Header } from "@/components/Header";
 import { googleLoginURL } from "./googleLoginURL";
 
-export function LoginPage() {
+export function HomePage() {
 
     return (
         <div className="h-dvh flex flex-col">

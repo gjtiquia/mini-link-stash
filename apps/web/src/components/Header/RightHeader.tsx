@@ -3,11 +3,11 @@ import { DarkModeToggle } from "@/components/DarkModeToggle";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { useAuthStore } from "@/store";
 import { HeaderVariant } from "./Header";
-import { googleLoginURL } from "@/features/login/googleLoginURL";
+import { googleLoginURL } from "@/features/home/googleLoginURL";
 
 export function RightHeader(props: { variant: HeaderVariant; }) {
 
-    const isLoggedIn = useAuthStore(state => state.isLoggedIn);
+    const isLoggedIn = useAuthStore(state => state.isLoggedIn());
 
     return <div className="px-3 flex items-center gap-3">
         <DarkModeToggle />

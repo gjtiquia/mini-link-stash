@@ -1,7 +1,7 @@
 import { AboutPage } from "@/features/about/AboutPage"
 import { createLazyFileRoute } from "@tanstack/react-router"
 
-export const Route = createLazyFileRoute('/about')({
+export const Route = createLazyFileRoute('/about/')({
     component: About,
 })
 
