@@ -50,3 +50,10 @@ v2 docs have guide on React Native with Expo (<https://v2.lucia-auth.com/guidebo
 Uses bearer token instead of cookies (compared to web which uses cookies by default)  
 
 Both `auth-js` and `lucia` uses your own database for auth. You own and manage the data, unlike `Supabase Auth`.
+
+## Form notes
+
+- create/select multi combobox for tags
+  - shadcn combobox is still a bit simple
+  - hv some solutions here
+    - https://github.com/shadcn-ui/ui/issues/927 
