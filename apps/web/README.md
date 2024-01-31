@@ -57,3 +57,4 @@ Both `auth-js` and `lucia` uses your own database for auth. You own and manage t
   - shadcn combobox is still a bit simple
   - hv some solutions here
     - https://github.com/shadcn-ui/ui/issues/927 
+    - https://github.com/shadcn-ui/ui/issues/66
