@@ -66,7 +66,7 @@ function DashboardView() {
 function StashLinkButton() {
     return <>
         <Button size={"lg"} className="text-xl px-28 py-6">
-            Stash Link
+            Stash New Link
         </Button>
     </>;
 }
