@@ -58,3 +58,4 @@ Both `auth-js` and `lucia` uses your own database for auth. You own and manage t
   - hv some solutions here
     - https://github.com/shadcn-ui/ui/issues/927 
     - https://github.com/shadcn-ui/ui/issues/66
+    - https://twitter.com/mxkaske/status/1657796540755320832?t=S9QA17I2-YmhBE43PNuWVQ&s=19 
