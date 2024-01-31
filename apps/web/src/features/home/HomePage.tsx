@@ -8,13 +8,17 @@ export function HomePage() {
         <div className="h-dvh flex flex-col">
             <Header variant="home" />
 
-            <div className="flex-grow">
+            <div className="sm:flex-grow"></div>
+
+            <div className="flex-grow sm:flex-grow-0">
                 <HeroBanner />
             </div>
 
-            <div className="py-16">
+            <div className="py-16 sm:pt-32">
                 <HeroCallToAction />
             </div>
+
+            <div className="sm:flex-grow"></div>
         </div>
     );
 }
