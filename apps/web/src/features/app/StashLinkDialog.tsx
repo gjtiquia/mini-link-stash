@@ -28,6 +28,10 @@ export function StashLinkDialog() {
                     </DialogDescription>
                 </DialogHeader>
 
+                {/* This area here can use form to build, sinces forms are just labels inputs too anyways */}
+                {/* Just need to think about how to connect the button in the dialog footer to the form submission */}
+                {/* {https://ui.shadcn.com/docs/components/form } */}
+
                 <div className="grid gap-4 py-4">
                     <div className="grid grid-cols-4 items-center gap-4">
                         <Label htmlFor="link" className="text-right">
