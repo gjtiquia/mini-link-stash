@@ -18,7 +18,7 @@ import { Textarea } from "@/components/ui/textarea"
 // Reference: https://ui.shadcn.com/docs/components/form
 
 const formSchema = z.object({
-    link: z.string().min(1),
+    link: z.string().url(),
     name: z.optional(z.string()),
     tag: z.optional(z.array(z.string())),
     notes: z.optional(z.string())
@@ -46,7 +46,7 @@ export function StashLinkForm() {
 
     return (
         <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+            <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-4">
                 <FormField
                     control={form.control}
                     name="link"
@@ -107,7 +107,7 @@ export function StashLinkForm() {
                     )}
                 />
 
-                <Button type="submit">Stash</Button>
+                <Button type="submit" className="sm:w-fit sm:px-8 sm:self-end">Stash</Button>
             </form>
         </Form>
     )
