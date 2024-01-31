@@ -2,9 +2,6 @@
 
 TODO
 
-- google sign in + auth
-- access token + express server + postgres
-  - set up local dev environment with docker
 - about wireframe
 - main page wireframge
   - Create link
@@ -13,7 +10,6 @@ TODO
   - Update link
   - Delete link
 - desktop responsive design (larger fonts)
-- themes
 
 ## Docker Notes
 
