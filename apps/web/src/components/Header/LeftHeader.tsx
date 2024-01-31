@@ -9,7 +9,7 @@ export function LeftHeader(props: { variant: HeaderVariant; }) {
     if (props.variant === "about")
         return <button className="px-2">
             <div className="flex items-center gap-2">
-                <Link to={"/"} className="font-bold">
+                <Link to={"/"} className="font-bold text-sm">
                     Mini Link Stash
                 </Link>
             </div>
@@ -19,10 +19,10 @@ export function LeftHeader(props: { variant: HeaderVariant; }) {
         <button className="px-2">
             <div className="flex items-center gap-2">
                 {/* TODO: replace with hamburger icon */}
-                <p>
+                <p className="text-sm">
                     =
                 </p>
-                <p className="font-bold">
+                <p className="font-bold text-sm">
                     Mini Link Stash
                 </p>
             </div>

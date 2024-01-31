@@ -8,6 +8,9 @@ export function AboutPage() {
             <Header variant="about" />
 
             <div className="h-full max-w-prose self-center flex flex-col sm:justify-center p-8 gap-8">
+
+                <div className="flex-grow sm:flex-grow-0"></div>
+
                 <StashDefinition />
 
                 <div className="flex-grow sm:flex-grow-0"></div>
@@ -30,7 +33,7 @@ export function AboutPage() {
                 <div className="flex-grow sm:flex-grow-0"></div>
 
 
-                <section className="flex flex-col gap-2 sm:gap-4">
+                <section className="flex flex-col gap-2 sm:gap-4 pb-16">
                     <p className="text-center">Never lose your links again.</p>
                     <a
                         className={buttonVariants({ size: "lg", className: "text-xl px-20" })}
