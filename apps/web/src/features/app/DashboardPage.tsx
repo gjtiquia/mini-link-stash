@@ -18,7 +18,7 @@ export function DashboardPage() {
             {greetingQuery.isError && <p>{greetingQuery.error.message}</p>}
 
             <div className="py-8">
-                <AddLinkButton />
+                <StashLinkButton />
             </div>
         </div>
     );
@@ -60,10 +60,10 @@ function DashboardView() {
     );
 }
 
-function AddLinkButton() {
+function StashLinkButton() {
     return <div className="flex flex-col items-center gap-2">
         <Button size={"lg"} className="text-xl px-28 py-6">
-            Add Link
+            Stash Link
         </Button>
     </div>;
 }

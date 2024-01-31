@@ -21,7 +21,7 @@ export function AboutPage() {
                     </section>
 
                     <section>
-                        <p>Save a link.</p>
+                        <p>Stash a link.</p>
                         <p>Add a name, tag, and description if you like.</p>
                         <p>Done. Quick and easy.</p>
                     </section>
