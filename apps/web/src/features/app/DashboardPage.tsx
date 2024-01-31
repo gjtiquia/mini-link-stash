@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Header } from "@/components/Header";
 import { trpc } from "@/lib/trpc";
+import { StashLinkDialog } from "./StashLinkDialog";
 
 export function DashboardPage() {
     const greetingQuery = trpc.greeting.useQuery();
@@ -17,8 +18,9 @@ export function DashboardPage() {
             {greetingQuery.isSuccess && <p>{greetingQuery.data.message}</p>}
             {greetingQuery.isError && <p>{greetingQuery.error.message}</p>}
 
-            <div className="py-8">
-                <StashLinkButton />
+            <div className="py-8 flex flex-col items-center">
+                {/* <StashLinkButton /> */}
+                <StashLinkDialog />
             </div>
         </div>
     );
@@ -60,10 +62,11 @@ function DashboardView() {
     );
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function StashLinkButton() {
-    return <div className="flex flex-col items-center gap-2">
+    return <>
         <Button size={"lg"} className="text-xl px-28 py-6">
             Stash Link
         </Button>
-    </div>;
+    </>;
 }
