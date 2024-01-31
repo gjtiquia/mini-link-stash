@@ -13,11 +13,12 @@ import {
     FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
+import { Textarea } from "@/components/ui/textarea"
 
 // Reference: https://ui.shadcn.com/docs/components/form
 
 const formSchema = z.object({
-    link: z.string(),
+    link: z.string().min(1),
     name: z.optional(z.string()),
     tag: z.optional(z.array(z.string())),
     notes: z.optional(z.string())
@@ -95,14 +96,18 @@ export function StashLinkForm() {
                         <FormItem>
                             <FormLabel>Notes</FormLabel>
                             <FormControl>
-                                <Input {...field} />
+                                <Textarea
+                                    className="resize-none"
+                                    rows={4}
+                                    {...field}
+                                />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
                     )}
                 />
 
-                <Button type="submit">Submit</Button>
+                <Button type="submit">Stash</Button>
             </form>
         </Form>
     )
