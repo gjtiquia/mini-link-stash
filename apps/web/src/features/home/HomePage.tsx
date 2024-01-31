@@ -46,7 +46,6 @@ function HeroCallToAction() {
             >
                 Log In With Google
             </a>
-
         </div>
     );
 }
