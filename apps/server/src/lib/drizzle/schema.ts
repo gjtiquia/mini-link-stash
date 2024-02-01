@@ -22,10 +22,11 @@ export const links = pgTable("link", {
     userId: text("user_id")
         .notNull()
         .references(() => users.id),
-    name: text("name"),
-    notes: text("notes"),
+    url: text("url").notNull(),
     createdAt: timestamp("created_at").notNull(),
     modifiedAt: timestamp("modified_at").notNull(),
+    name: text("name"),
+    notes: text("notes"),
 })
 
 export const tags = pgTable("tag", {
@@ -33,7 +34,7 @@ export const tags = pgTable("tag", {
     userId: text("user_id")
         .notNull()
         .references(() => users.id),
-    name: text("name"),
+    name: text("name").notNull(),
     createdAt: timestamp("created_at").notNull(),
     modifiedAt: timestamp("modified_at").notNull(),
 })

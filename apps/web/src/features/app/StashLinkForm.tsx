@@ -15,6 +15,7 @@ import {
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { StashTagSelector } from "./StashTagSelector"
+import { trpc } from "@/lib/trpc"
 
 // Reference: https://ui.shadcn.com/docs/components/form
 // Reference: https://shadcnui-expansions.typeart.cc/docs/multiple-selector#Form
@@ -26,29 +27,37 @@ const tagSchema = z.object({
 
 const formSchema = z.object({
     link: z.string().url(),
-    name: z.optional(z.string()),
-    tag: z.optional(z.array(tagSchema)),
-    notes: z.optional(z.string()),
+    name: z.string(),
+    tags: z.array(tagSchema),
+    notes: z.string(),
 })
 
 export function StashLinkForm() {
 
+    const addLinkMutation = trpc.addLink.useMutation();
     // 1. Define your form.
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
             link: "",
             name: "",
-            tag: [],
+            tags: [],
             notes: ""
-        },
+        }
     })
 
     // 2. Define a submit handler.
-    function onSubmit(values: z.infer<typeof formSchema>) {
+    async function onSubmit(values: z.infer<typeof formSchema>) {
         // Do something with the form values.
         // ✅ This will be type-safe and validated.
         console.log(values)
+
+        await addLinkMutation.mutateAsync({
+            link: values.link,
+            name: values.name,
+            tags: values.tags.map(x => x.value),
+            notes: values.notes
+        })
     }
 
     return (
@@ -84,7 +93,7 @@ export function StashLinkForm() {
 
                 <FormField
                     control={form.control}
-                    name="tag"
+                    name="tags"
                     render={({ field }) => (
                         <FormItem>
                             <FormLabel>Tags</FormLabel>
@@ -117,7 +126,9 @@ export function StashLinkForm() {
                     )}
                 />
 
-                <Button type="submit" className="sm:w-fit sm:px-8 sm:self-end">Stash</Button>
+                {form.watch().link.length > 0 &&
+                    <Button type="submit" className="sm:w-fit sm:px-8 sm:self-end">Stash</Button>
+                }
             </form>
         </Form>
     )
