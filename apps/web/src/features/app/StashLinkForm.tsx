@@ -32,7 +32,11 @@ const formSchema = z.object({
     notes: z.string(),
 })
 
-export function StashLinkForm() {
+interface StashLinkFromProps {
+    onSubmitSuccess: () => void
+}
+
+export function StashLinkForm(props: StashLinkFromProps) {
 
     const addLinkMutation = trpc.addLink.useMutation();
     // 1. Define your form.
@@ -58,6 +62,8 @@ export function StashLinkForm() {
             tags: values.tags.map(x => x.value),
             notes: values.notes
         })
+
+        props.onSubmitSuccess();
     }
 
     return (

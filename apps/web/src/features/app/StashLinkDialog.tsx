@@ -4,15 +4,20 @@ import {
     DialogContent,
     DialogDescription,
     // DialogFooter,
+    // DialogClose,
     DialogHeader,
     DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog"
 import { StashLinkForm } from "./StashLinkForm"
+import { useState } from "react";
 
 export function StashLinkDialog() {
+    const [open, setOpen] = useState(false);
+
     return (
-        <Dialog>
+        <Dialog open={open} onOpenChange={setOpen}>
+
             <DialogTrigger asChild>
                 <Button size={"lg"} className="text-xl px-28 py-6">
                     Stash Link
@@ -20,6 +25,7 @@ export function StashLinkDialog() {
             </DialogTrigger>
 
             <DialogContent>
+
                 <DialogHeader>
                     <DialogTitle>Stash New Link</DialogTitle>
                     <DialogDescription>
@@ -27,7 +33,7 @@ export function StashLinkDialog() {
                     </DialogDescription>
                 </DialogHeader>
 
-                <StashLinkForm />
+                <StashLinkForm onSubmitSuccess={() => setOpen(false)} />
 
             </DialogContent>
         </Dialog>
