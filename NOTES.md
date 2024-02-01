@@ -9,6 +9,10 @@ TODO
     - tan stack table?
   - Update link
   - Delete link
+
+- lol make sure users cant see each others stuff
+  - row level security?
+
 - desktop responsive design (larger fonts)
 
 - view link features
