@@ -1,4 +1,4 @@
-import MultipleSelector, { Option } from '@/components/ui/multiple-selector';
+import MultipleSelector, { Option } from "@/components/ui/multiple-selector";
 
 const OPTIONS: Option[] = [
     { label: 'nextjs', value: 'nextjs' },
@@ -9,24 +9,22 @@ const OPTIONS: Option[] = [
     { label: 'Vue', value: 'vue' },
     { label: 'Svelte', value: 'svelte' },
     { label: 'Angular', value: 'angular' },
-    { label: 'Ember', value: 'ember', disable: true },
-    { label: 'Gatsby', value: 'gatsby', disable: true },
+    { label: 'Ember', value: 'ember' },
+    { label: 'Gatsby', value: 'gatsby' },
     { label: 'Astro', value: 'astro' },
 ];
 
-export const StashTagSelector = () => {
+interface StashTagSelectorProps {
+    value?: Option[],
+    onChange?: ((options: Option[]) => void),
+}
+
+export function StashTagSelector(props: StashTagSelectorProps) {
     return (
-        <div className="w-full px-10">
-            <MultipleSelector
-                defaultOptions={OPTIONS}
-                placeholder="Type something that does not exist in dropdowns..."
-                creatable
-                emptyIndicator={
-                    <p className="text-center text-lg leading-10 text-gray-600 dark:text-gray-400">
-                        no results found.
-                    </p>
-                }
-            />
-        </div>
+        <MultipleSelector
+            value={props.value}
+            onChange={props.onChange}
+            defaultOptions={OPTIONS}
+            creatable />
     );
-};
+}
