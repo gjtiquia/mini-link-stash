@@ -46,3 +46,26 @@
 
 - Setup
   - <https://trpc.io/docs/server/adapters/express>
+
+## Database Notes
+
+- Database schema for tags
+  - each link can have many tags, each tag has many links => many-to-many relationship
+  - typically use three tables for a many-to-many relationship, with a middle table used as a "junction" table
+  - junction table cons: slower inserts and deletes; pros:
+    - <https://stackoverflow.com/questions/20856/recommended-sql-database-design-for-tags-or-tagging>
+    - <http://howto.philippkeller.com/2005/04/24/Tags-Database-schemas/> (Great comparison of different schemas)
+    - <https://stackoverflow.com/questions/20856/recommended-sql-database-design-for-tags-or-tagging> (Performance comparison)
+
+- Turso
+  - SQLite but scaled to millions
+    - <https://turso.tech/>
+  - one database per user
+    - <https://blog.turso.tech/databases-have-traditionally-been-expensive.-what-if-we-could-change-that-ec7f32ab>
+    - <https://world.hey.com/dhh/multi-tenancy-is-what-s-hard-about-scaling-web-services-dd1e0e81>
+    - <https://blog.turso.tech/give-each-of-your-users-their-own-sqlite-database-b74445f4>
+  - seems... feasible? especially since, each user's data is pretty much isolated🤔
+  - need more research
+  - but the pricing for hosting... hmm
+    - dont seem to have a self host documentaion
+    - simple postgres on railway with pay-as-you-go is quite hard to beat
