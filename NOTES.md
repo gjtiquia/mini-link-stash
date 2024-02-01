@@ -11,6 +11,11 @@ TODO
   - Delete link
 - desktop responsive design (larger fonts)
 
+- view link features
+  - as we dont have folders and just tags... need to find an easy way to isolate tags
+    - similar to mixing, can have "MUTE" or "SOLO" => filter "includes" or "does not include".
+    - cuz like in my case, a particular list of links might be related to a single project i'm doing, and i may want to look at all the links for that particular project
+
 ## Docker Notes
 
 `docker compose up --build` vs `docker compose up`

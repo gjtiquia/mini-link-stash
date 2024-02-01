@@ -56,6 +56,8 @@
     - <https://stackoverflow.com/questions/20856/recommended-sql-database-design-for-tags-or-tagging>
     - <http://howto.philippkeller.com/2005/04/24/Tags-Database-schemas/> (Great comparison of different schemas)
     - <https://stackoverflow.com/questions/20856/recommended-sql-database-design-for-tags-or-tagging> (Performance comparison)
+  - tag architecture reference
+    - <https://justpaste.it/b26kl>
 
 - Turso
   - SQLite but scaled to millions
