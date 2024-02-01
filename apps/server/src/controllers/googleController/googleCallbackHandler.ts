@@ -30,8 +30,13 @@ async function tryGetEmailFromGoogleCallback(req: Request, res: Response) {
     // Skip verification in local development
     // Because Google OAuth requires a public redirect uri, does not allow localhost
     // This workaround is for quicker local development iteration.
-    if (!env.IS_PRODUCTION)
-        return { email: "abc@gmail.com" };
+    if (!env.IS_PRODUCTION) {
+        const devEmail = process.env.DEV_EMAIL;
+        if (!devEmail)
+            throw new Error("DEV_EMAIL undefined!")
+
+        return { email: devEmail };
+    }
 
     const { code, state } = getDataFromQueryParams(req);
     const { storedCodeVerifier, storedState } = getDataFromCookies(req);
