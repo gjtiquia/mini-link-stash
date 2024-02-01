@@ -14,15 +14,37 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
+import MultipleSelector, { Option } from "@/components/ui/multiple-selector"
 
 // Reference: https://ui.shadcn.com/docs/components/form
+// Reference: https://shadcnui-expansions.typeart.cc/docs/multiple-selector#Form
+
+const tagSchema = z.object({
+    label: z.string(),
+    value: z.string(),
+    disable: z.boolean().optional(),
+});
 
 const formSchema = z.object({
     link: z.string().url(),
     name: z.optional(z.string()),
-    tag: z.optional(z.array(z.string())),
+    tag: z.optional(z.array(tagSchema)),
     notes: z.optional(z.string())
 })
+
+const OPTIONS: Option[] = [
+    { label: 'nextjs', value: 'nextjs' },
+    { label: 'React', value: 'react' },
+    { label: 'Remix', value: 'remix' },
+    { label: 'Vite', value: 'vite' },
+    { label: 'Nuxt', value: 'nuxt' },
+    { label: 'Vue', value: 'vue' },
+    { label: 'Svelte', value: 'svelte' },
+    { label: 'Angular', value: 'angular' },
+    { label: 'Ember', value: 'ember', disable: true },
+    { label: 'Gatsby', value: 'gatsby', disable: true },
+    { label: 'Astro', value: 'astro' },
+];
 
 export function StashLinkForm() {
 
@@ -68,7 +90,7 @@ export function StashLinkForm() {
                         <FormItem>
                             <FormLabel>Name</FormLabel>
                             <FormControl>
-                                <Input {...field} />
+                                <Input placeholder="(Optional) Add name" {...field} />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
@@ -82,7 +104,13 @@ export function StashLinkForm() {
                         <FormItem>
                             <FormLabel>Tags</FormLabel>
                             <FormControl>
-                                <Input {...field} />
+                                <MultipleSelector
+                                    value={field.value}
+                                    onChange={field.onChange}
+                                    defaultOptions={OPTIONS}
+                                    placeholder="Add tags"
+                                    creatable
+                                />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
