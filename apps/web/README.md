@@ -56,6 +56,9 @@ Both `auth-js` and `lucia` uses your own database for auth. You own and manage t
 - create/select multi combobox for tags
   - shadcn combobox is still a bit simple
   - hv some solutions here
-    - https://github.com/shadcn-ui/ui/issues/927 
-    - https://github.com/shadcn-ui/ui/issues/66
-    - https://twitter.com/mxkaske/status/1657796540755320832?t=S9QA17I2-YmhBE43PNuWVQ&s=19 
+    - <https://github.com/shadcn-ui/ui/issues/927>
+    - <https://github.com/shadcn-ui/ui/issues/66>
+      - <https://github.com/shadcn-ui/ui/issues/66#issuecomment-1871652145>
+      - this one is goooooooood!
+        - <https://shadcnui-expansions.typeart.cc/docs/multiple-selector>
+    - <https://twitter.com/mxkaske/status/1657796540755320832?t=S9QA17I2-YmhBE43PNuWVQ&s=19>
