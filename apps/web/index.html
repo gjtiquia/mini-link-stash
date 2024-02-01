@@ -1,15 +1,26 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="dark">
 
 <head>
   <meta charset="UTF-8" />
   <!-- <link rel="icon" type="image/svg+xml" href="/vite.svg" /> -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <link href="src/index.css" rel="stylesheet">
+
   <title>Mini Link Stash</title>
 </head>
 
 <body>
-  <div id="root"></div>
+  <div id="root">
+    <!-- Loading element which will be replaced be React on render -->
+    <div class="h-dvh flex flex-col items-center justify-center bg-background">
+      <svg class="h-12 w-12 animate-spin" viewBox="0 0 50 50">
+        <circle class="stroke-foreground" style="stroke-dasharray: 90, 150;" cx="25" cy="25" r="20" fill="none"
+          stroke-width="5"></circle>
+      </svg>
+    </div>
+  </div>
   <script type="module" src="/src/main.tsx"></script>
 </body>
 
