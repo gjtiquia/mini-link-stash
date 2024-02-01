@@ -132,9 +132,15 @@ export function StashLinkForm(props: StashLinkFromProps) {
                     )}
                 />
 
-                {form.watch().link.length > 0 &&
+                {(form.watch().link.length > 0 && !addLinkMutation.isPending) &&
                     <Button type="submit" className="sm:w-fit sm:px-8 sm:self-end">Stash</Button>
                 }
+
+                {addLinkMutation.isPending &&
+                    <Button disabled className="sm:w-fit sm:px-8 sm:self-end">Stashing...</Button>
+                }
+
+                {/* // TODO : Global toast for errors */}
             </form>
         </Form>
     )
