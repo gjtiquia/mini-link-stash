@@ -16,3 +16,37 @@ export const sessions = pgTable("session", {
         mode: "date"
     }).notNull()
 });
+
+export const links = pgTable("link", {
+    id: text("id").primaryKey(),
+    userId: text("user_id")
+        .notNull()
+        .references(() => users.id),
+    name: text("name"),
+    notes: text("notes"),
+    createdAt: timestamp("created_at").notNull(),
+    modifiedAt: timestamp("modified_at").notNull(),
+})
+
+export const tags = pgTable("tag", {
+    id: text("id").primaryKey(),
+    userId: text("user_id")
+        .notNull()
+        .references(() => users.id),
+    name: text("name"),
+    createdAt: timestamp("created_at").notNull(),
+    modifiedAt: timestamp("modified_at").notNull(),
+})
+
+export const tagMaps = pgTable("tagmap", {
+    id: text("id").primaryKey(),
+    userId: text("user_id")
+        .notNull()
+        .references(() => users.id),
+    linkId: text("link_id")
+        .notNull()
+        .references(() => links.id),
+    tagId: text("tag_id")
+        .notNull()
+        .references(() => tags.id),
+})
