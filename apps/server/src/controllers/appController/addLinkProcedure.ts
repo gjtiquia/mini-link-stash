@@ -22,12 +22,6 @@ export function addLinkProcedure() {
 
             const userId = ctx.user.id;
             const dateNow = new Date();
-            const tags: Tag[] = [];
-
-            for (var tagName of input.tags) {
-                const tag = await getExistingOrCreateNewTagAsync(userId, tagName, dateNow);
-                tags.push(tag);
-            }
 
             const newLink = await createNewLinkAsync({
                 userId,
@@ -38,21 +32,31 @@ export function addLinkProcedure() {
                 date: dateNow
             });
 
+            const tags: Tag[] = [];
+            for (var tagName of input.tags) {
+                const tag = await getExistingOrCreateNewTagAsync(userId, tagName, dateNow);
+                tags.push(tag);
+            }
+
             await createNewTagmapsAsync(userId, newLink, tags);
 
             console.log(`[${ctx.user.email}] Add Link Success!`);
         });
 }
 
-async function createNewTagmapsAsync(userId: string, newLink: Link, tags: Tag[]) {
-    for (var tag of tags) {
-        await db.insert(tagMaps).values({
-            id: generateId(15),
-            userId,
-            linkId: newLink.id,
-            tagId: tag.id
-        })
-    }
+async function createNewLinkAsync(params: { userId: string, link: string; name: string; tags: string[]; notes: string; date: Date }) {
+    const result = await db.insert(links).values({
+        id: generateId(15),
+        userId: params.userId,
+        url: params.link,
+        name: params.name,
+        notes: params.notes,
+        createdAt: params.date,
+        modifiedAt: params.date
+    }).returning();
+
+    const newLink = result[0];
+    return newLink;
 }
 
 async function getExistingOrCreateNewTagAsync(userId: string, tagName: string, date: Date) {
@@ -94,17 +98,13 @@ async function createNewTagAsync(userId: string, tagName: string, date: Date) {
     return newTag;
 }
 
-async function createNewLinkAsync(params: { userId: string, link: string; name: string; tags: string[]; notes: string; date: Date }) {
-    const result = await db.insert(links).values({
-        id: generateId(15),
-        userId: params.userId,
-        url: params.link,
-        name: params.name,
-        notes: params.notes,
-        createdAt: params.date,
-        modifiedAt: params.date
-    }).returning();
-
-    const newLink = result[0];
-    return newLink;
+async function createNewTagmapsAsync(userId: string, newLink: Link, tags: Tag[]) {
+    for (var tag of tags) {
+        await db.insert(tagMaps).values({
+            id: generateId(15),
+            userId,
+            linkId: newLink.id,
+            tagId: tag.id
+        })
+    }
 }
