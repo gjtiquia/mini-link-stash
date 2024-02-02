@@ -9,6 +9,7 @@ import { Route as IndexImport } from './routes/index'
 import { Route as LoginIndexImport } from './routes/login/index'
 import { Route as AppIndexImport } from './routes/app/index'
 import { Route as AppDashboardImport } from './routes/app/dashboard'
+import { Route as AppLinksIndexImport } from './routes/app/links/index'
 
 // Create Virtual Routes
 
@@ -41,6 +42,13 @@ const AppDashboardRoute = AppDashboardImport.update({
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/app/dashboard.lazy').then((d) => d.Route))
 
+const AppLinksIndexRoute = AppLinksIndexImport.update({
+  path: '/app/links/',
+  getParentRoute: () => rootRoute,
+} as any).lazy(() =>
+  import('./routes/app/links/index.lazy').then((d) => d.Route),
+)
+
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
@@ -65,6 +73,10 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutIndexLazyImport
       parentRoute: typeof rootRoute
     }
+    '/app/links/': {
+      preLoaderRoute: typeof AppLinksIndexImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
@@ -76,4 +88,5 @@ export const routeTree = rootRoute.addChildren([
   AppIndexRoute,
   LoginIndexRoute,
   AboutIndexLazyRoute,
+  AppLinksIndexRoute,
 ])

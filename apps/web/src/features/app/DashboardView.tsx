@@ -1,6 +1,8 @@
+import { buttonVariants } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
 import { trpc } from "@/lib/trpc";
+import { Link } from "@tanstack/react-router";
 
 export function DashboardView() {
 
@@ -47,13 +49,26 @@ function RecentLinksView() {
     if (getRecentLinksQuery.isError)
         return <p className="text-red-500">Error: {getRecentLinksQuery.error.message}</p>
 
+    if (getRecentLinksQuery.data.length == 0)
+        return <p className="p-2">No links yet</p>
+
     return (
-        <ScrollArea className="h-full rounded-md border">
-            <ul className="p-2">
-                {getRecentLinksQuery.data?.length > 0 ? getRecentLinksQuery.data?.map((x) => (
+        <ScrollArea className="h-full p-2 rounded-md border">
+            <ul>
+                {getRecentLinksQuery.data?.map((x) => (
                     <RecentLinkElement key={x.link.id} link={{ ...x.link, modifiedAt: new Date(x.link.modifiedAt) }} tags={x.tags} />
-                )) : <p>No links yet</p>}
+                ))}
             </ul>
+
+            <p className="text-sm pb-2">
+                Showing 10 most recent links
+            </p>
+            <Link
+                to="/app/links"
+                className={buttonVariants({ size: "sm", variant: "secondary" })}
+            >
+                See all links
+            </Link>
         </ScrollArea>
     )
 }
