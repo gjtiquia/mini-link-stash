@@ -2,12 +2,15 @@ import * as trpcExpress from '@trpc/server/adapters/express';
 import { createContext, router } from "../lib/trpc";
 import {
     logoutProcedure,
-    addLinkProcedure
+    addLinkProcedure,
+    getRecentLinksProcedure
 } from '../controllers/appController';
 
 const trpcAppRouter = router({
     logout: logoutProcedure(),
-    addLink: addLinkProcedure()
+
+    addLink: addLinkProcedure(),
+    getRecentLinks: getRecentLinksProcedure()
 });
 
 // export type definition of API

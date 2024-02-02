@@ -17,7 +17,6 @@ export function addLinkProcedure() {
         }))
         .mutation(async (opts) => {
             const { input, ctx } = opts;
-
             console.log(`[${ctx.user.email}] Add Link:`, input);
 
             const userId = ctx.user.id;
@@ -33,7 +32,7 @@ export function addLinkProcedure() {
             });
 
             const tags: Tag[] = [];
-            for (var tagName of input.tags) {
+            for (let tagName of input.tags) {
                 const tag = await getExistingOrCreateNewTagAsync(userId, tagName, dateNow);
                 tags.push(tag);
             }
@@ -99,7 +98,7 @@ async function createNewTagAsync(userId: string, tagName: string, date: Date) {
 }
 
 async function createNewTagmapsAsync(userId: string, newLink: Link, tags: Tag[]) {
-    for (var tag of tags) {
+    for (let tag of tags) {
         await db.insert(tagMaps).values({
             id: generateId(15),
             userId,
