@@ -8,8 +8,8 @@ export const Route = createFileRoute('/app/links/')({
         // TODO : This checking should only happen in parent /app
         console.log("/app/links beforeLoad")
 
-        const isLoggedIn = useAuthStore.getState().isLoggedIn();
-        if (!isLoggedIn)
-            throw redirect({ to: '/' })
+        // const isLoggedIn = useAuthStore.getState().isLoggedIn();
+        // if (!isLoggedIn)
+        //     throw redirect({ to: '/' })
     },
 })

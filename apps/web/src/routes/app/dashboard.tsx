@@ -8,8 +8,8 @@ export const Route = createFileRoute('/app/dashboard')({
         // TODO : This checking should only happen in parent /app
         console.log("/app/dashboard beforeLoad")
 
-        const isLoggedIn = useAuthStore.getState().isLoggedIn();
-        if (!isLoggedIn)
-            throw redirect({ to: '/' })
+        // const isLoggedIn = useAuthStore.getState().isLoggedIn();
+        // if (!isLoggedIn)
+        //     throw redirect({ to: '/' })
     }
 })
