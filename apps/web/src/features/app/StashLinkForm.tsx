@@ -38,7 +38,14 @@ interface StashLinkFromProps {
 
 export function StashLinkForm(props: StashLinkFromProps) {
 
-    const addLinkMutation = trpc.addLink.useMutation();
+    const utils = trpc.useUtils();
+    const addLinkMutation = trpc.addLink.useMutation({
+        onSuccess: () => {
+            // utils.invalidate(); // Invalidates ALL queries
+            utils.getRecentLinks.invalidate();
+        }
+    });
+
     // 1. Define your form.
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),

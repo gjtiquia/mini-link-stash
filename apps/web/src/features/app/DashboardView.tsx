@@ -61,7 +61,7 @@ function RecentLinksView() {
                                 {x.link.url}
                             </a>
                             <p>{x.link.modifiedAt}</p>
-                            <div>{x.tags.map((tag) => <p>{tag.name}</p>)}</div>
+                            <div>{x.tags.map((tag) => <p key={tag.id}>{tag.name}</p>)}</div>
                         </div>
                         <Separator className="my-2" />
                     </li>
