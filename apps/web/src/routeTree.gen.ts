@@ -5,17 +5,22 @@ import { createFileRoute } from '@tanstack/react-router'
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as AppRouteImport } from './routes/app/route'
 import { Route as IndexImport } from './routes/index'
 import { Route as LoginIndexImport } from './routes/login/index'
-import { Route as AppIndexImport } from './routes/app/index'
-import { Route as AppDashboardImport } from './routes/app/dashboard'
-import { Route as AppLinksIndexImport } from './routes/app/links/index'
+import { Route as AppLinksRouteImport } from './routes/app/links/route'
+import { Route as AppDashboardRouteImport } from './routes/app/dashboard/route'
 
 // Create Virtual Routes
 
 const AboutIndexLazyImport = createFileRoute('/about/')()
 
 // Create/Update Routes
+
+const AppRouteRoute = AppRouteImport.update({
+  path: '/app',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const IndexRoute = IndexImport.update({
   path: '/',
@@ -32,21 +37,16 @@ const LoginIndexRoute = LoginIndexImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const AppIndexRoute = AppIndexImport.update({
-  path: '/app/',
-  getParentRoute: () => rootRoute,
+const AppLinksRouteRoute = AppLinksRouteImport.update({
+  path: '/links',
+  getParentRoute: () => AppRouteRoute,
 } as any)
 
-const AppDashboardRoute = AppDashboardImport.update({
-  path: '/app/dashboard',
-  getParentRoute: () => rootRoute,
-} as any).lazy(() => import('./routes/app/dashboard.lazy').then((d) => d.Route))
-
-const AppLinksIndexRoute = AppLinksIndexImport.update({
-  path: '/app/links/',
-  getParentRoute: () => rootRoute,
+const AppDashboardRouteRoute = AppDashboardRouteImport.update({
+  path: '/dashboard',
+  getParentRoute: () => AppRouteRoute,
 } as any).lazy(() =>
-  import('./routes/app/links/index.lazy').then((d) => d.Route),
+  import('./routes/app/dashboard/route.lazy').then((d) => d.Route),
 )
 
 // Populate the FileRoutesByPath interface
@@ -57,13 +57,17 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
     }
-    '/app/dashboard': {
-      preLoaderRoute: typeof AppDashboardImport
+    '/app': {
+      preLoaderRoute: typeof AppRouteImport
       parentRoute: typeof rootRoute
     }
-    '/app/': {
-      preLoaderRoute: typeof AppIndexImport
-      parentRoute: typeof rootRoute
+    '/app/dashboard': {
+      preLoaderRoute: typeof AppDashboardRouteImport
+      parentRoute: typeof AppRouteImport
+    }
+    '/app/links': {
+      preLoaderRoute: typeof AppLinksRouteImport
+      parentRoute: typeof AppRouteImport
     }
     '/login/': {
       preLoaderRoute: typeof LoginIndexImport
@@ -73,10 +77,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutIndexLazyImport
       parentRoute: typeof rootRoute
     }
-    '/app/links/': {
-      preLoaderRoute: typeof AppLinksIndexImport
-      parentRoute: typeof rootRoute
-    }
   }
 }
 
@@ -84,9 +84,7 @@ declare module '@tanstack/react-router' {
 
 export const routeTree = rootRoute.addChildren([
   IndexRoute,
-  AppDashboardRoute,
-  AppIndexRoute,
+  AppRouteRoute.addChildren([AppDashboardRouteRoute, AppLinksRouteRoute]),
   LoginIndexRoute,
   AboutIndexLazyRoute,
-  AppLinksIndexRoute,
 ])

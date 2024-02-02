@@ -1,8 +1,8 @@
 import { useAuthStore } from '@/store';
 import { createFileRoute, redirect } from '@tanstack/react-router'
 
-export const Route = createFileRoute('/app/')({
-    beforeLoad: () => {
+export const Route = createFileRoute('/app')({
+    beforeLoad: async () => {
         console.log("/app beforeLoad")
 
         const isLoggedIn = useAuthStore.getState().isLoggedIn();
@@ -10,5 +10,5 @@ export const Route = createFileRoute('/app/')({
             throw redirect({ to: '/' })
 
         throw redirect({ to: '/app/dashboard' })
-    },
+    }
 })
