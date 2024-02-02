@@ -1,10 +1,9 @@
 import { Button } from "@/components/ui/button";
 import { Header } from "@/components/Header";
-import { trpc } from "@/lib/trpc";
+// import { trpc } from "@/lib/trpc";
 import { StashLinkDialog } from "./StashLinkDialog";
 
 export function DashboardPage() {
-    const greetingQuery = trpc.greeting.useQuery();
 
     return (
         <div className="h-dvh flex flex-col">
@@ -13,10 +12,6 @@ export function DashboardPage() {
             <div className="flex-grow py-2">
                 <DashboardView />
             </div>
-
-            {greetingQuery.isPending && <p>{"Loading..."}</p>}
-            {greetingQuery.isSuccess && <p>{greetingQuery.data.message}</p>}
-            {greetingQuery.isError && <p>{greetingQuery.error.message}</p>}
 
             <div className="py-8 flex flex-col items-center">
                 {/* <StashLinkButton /> */}
