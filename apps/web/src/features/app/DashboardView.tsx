@@ -50,17 +50,18 @@ function RecentLinksView() {
     return (
         <ScrollArea className="h-full rounded-md border">
             <ul className="p-2">
-                {getRecentLinksQuery.data?.map((link) => (
-                    <li key={link.id} className="break-all">
+                {getRecentLinksQuery.data?.map((x) => (
+                    <li key={x.link.id} className="break-all">
                         <div className="
                             sm:grid sm:auto-cols-fr sm:grid-flow-col
                         ">
-                            <a href={link.url} target="_blank"
+                            <a href={x.link.url} target="_blank"
                                 className="text-blue-500 hover:text-blue-600 active:text-blue-700"
                             >
-                                {link.url}
+                                {x.link.url}
                             </a>
-                            <p>{link.modifiedAt}</p>
+                            <p>{x.link.modifiedAt}</p>
+                            <div>{x.tags.map((tag) => <p>{tag.name}</p>)}</div>
                         </div>
                         <Separator className="my-2" />
                     </li>
