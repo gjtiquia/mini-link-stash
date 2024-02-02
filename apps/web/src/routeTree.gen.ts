@@ -5,48 +5,50 @@ import { createFileRoute } from '@tanstack/react-router'
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
-import { Route as IndexImport } from './routes/index'
-import { Route as LoginIndexImport } from './routes/login/index'
-import { Route as AppIndexImport } from './routes/app/index'
-import { Route as AppDashboardImport } from './routes/app/dashboard'
-import { Route as AppLinksIndexImport } from './routes/app/links/index'
+import { Route as LoginRouteImport } from './routes/login/route'
+import { Route as AppRouteImport } from './routes/app/route'
+import { Route as RouteImport } from './routes/route'
 
 // Create Virtual Routes
 
 const AboutIndexLazyImport = createFileRoute('/about/')()
+const AppLinksRouteLazyImport = createFileRoute('/app/links')()
+const AppDashboardRouteLazyImport = createFileRoute('/app/dashboard')()
 
 // Create/Update Routes
 
-const IndexRoute = IndexImport.update({
+const LoginRouteRoute = LoginRouteImport.update({
+  path: '/login',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const AppRouteRoute = AppRouteImport.update({
+  path: '/app',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const RouteRoute = RouteImport.update({
   path: '/',
   getParentRoute: () => rootRoute,
-} as any).lazy(() => import('./routes/index.lazy').then((d) => d.Route))
+} as any).lazy(() => import('./routes/route.lazy').then((d) => d.Route))
 
 const AboutIndexLazyRoute = AboutIndexLazyImport.update({
   path: '/about/',
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/about/index.lazy').then((d) => d.Route))
 
-const LoginIndexRoute = LoginIndexImport.update({
-  path: '/login/',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const AppIndexRoute = AppIndexImport.update({
-  path: '/app/',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const AppDashboardRoute = AppDashboardImport.update({
-  path: '/app/dashboard',
-  getParentRoute: () => rootRoute,
-} as any).lazy(() => import('./routes/app/dashboard.lazy').then((d) => d.Route))
-
-const AppLinksIndexRoute = AppLinksIndexImport.update({
-  path: '/app/links/',
-  getParentRoute: () => rootRoute,
+const AppLinksRouteLazyRoute = AppLinksRouteLazyImport.update({
+  path: '/links',
+  getParentRoute: () => AppRouteRoute,
 } as any).lazy(() =>
-  import('./routes/app/links/index.lazy').then((d) => d.Route),
+  import('./routes/app/links/route.lazy').then((d) => d.Route),
+)
+
+const AppDashboardRouteLazyRoute = AppDashboardRouteLazyImport.update({
+  path: '/dashboard',
+  getParentRoute: () => AppRouteRoute,
+} as any).lazy(() =>
+  import('./routes/app/dashboard/route.lazy').then((d) => d.Route),
 )
 
 // Populate the FileRoutesByPath interface
@@ -54,27 +56,27 @@ const AppLinksIndexRoute = AppLinksIndexImport.update({
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
     '/': {
-      preLoaderRoute: typeof IndexImport
+      preLoaderRoute: typeof RouteImport
+      parentRoute: typeof rootRoute
+    }
+    '/app': {
+      preLoaderRoute: typeof AppRouteImport
+      parentRoute: typeof rootRoute
+    }
+    '/login': {
+      preLoaderRoute: typeof LoginRouteImport
       parentRoute: typeof rootRoute
     }
     '/app/dashboard': {
-      preLoaderRoute: typeof AppDashboardImport
-      parentRoute: typeof rootRoute
+      preLoaderRoute: typeof AppDashboardRouteLazyImport
+      parentRoute: typeof AppRouteImport
     }
-    '/app/': {
-      preLoaderRoute: typeof AppIndexImport
-      parentRoute: typeof rootRoute
-    }
-    '/login/': {
-      preLoaderRoute: typeof LoginIndexImport
-      parentRoute: typeof rootRoute
+    '/app/links': {
+      preLoaderRoute: typeof AppLinksRouteLazyImport
+      parentRoute: typeof AppRouteImport
     }
     '/about/': {
       preLoaderRoute: typeof AboutIndexLazyImport
-      parentRoute: typeof rootRoute
-    }
-    '/app/links/': {
-      preLoaderRoute: typeof AppLinksIndexImport
       parentRoute: typeof rootRoute
     }
   }
@@ -83,10 +85,11 @@ declare module '@tanstack/react-router' {
 // Create and export the route tree
 
 export const routeTree = rootRoute.addChildren([
-  IndexRoute,
-  AppDashboardRoute,
-  AppIndexRoute,
-  LoginIndexRoute,
+  RouteRoute,
+  AppRouteRoute.addChildren([
+    AppDashboardRouteLazyRoute,
+    AppLinksRouteLazyRoute,
+  ]),
+  LoginRouteRoute,
   AboutIndexLazyRoute,
-  AppLinksIndexRoute,
 ])
