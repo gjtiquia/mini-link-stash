@@ -50,7 +50,7 @@ function RecentLinksView() {
     return (
         <ScrollArea className="h-full rounded-md border">
             <ul className="p-2">
-                {getRecentLinksQuery.data?.map((x) => (
+                {getRecentLinksQuery.data?.length > 0 ? getRecentLinksQuery.data?.map((x) => (
                     <li key={x.link.id} className="break-all">
                         <div className="
                             sm:grid sm:auto-cols-fr sm:grid-flow-col
@@ -65,7 +65,7 @@ function RecentLinksView() {
                         </div>
                         <Separator className="my-2" />
                     </li>
-                ))}
+                )) : <p>No links yet</p>}
             </ul>
         </ScrollArea>
     )
